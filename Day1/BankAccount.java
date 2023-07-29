@@ -33,6 +33,7 @@ public class BankAccount {
         account.withdraw(amt);
         System.out.println("Your Balance is:");
         account.viewBalance();
+        sc.close
 
     }
 
