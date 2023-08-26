@@ -4,15 +4,16 @@ import java.util.Scanner;// Import the Scanner class to read text files
 
 public class Main {
 //function to count words
-    public static int wordCount(String word)  {
+    public static int wordCount(String word, String fileName)  {
         int count =0;
         try {
-            File file = new File("input.txt");// filename
-            Scanner scan = new Scanner(file);
+            File file =new File(fileName);
+            Scanner scan=new Scanner(file);
             scan.useDelimiter("\\Z");
             String fileConcat = scan.next();
             System.out.println(fileConcat);
             String temp[] = fileConcat.split("[ ]|[.]|[,]|[ \\t]");
+
             for (int i = 0; i < temp.length; i++) {
                 if (word.equalsIgnoreCase(temp[i])) {
                     count++;
@@ -28,7 +29,7 @@ public class Main {
         return count;
     }
     public static void main(String[] args) throws FileNotFoundException {
-        int count=wordCount("JAVA");//function calling
+        int count=wordCount("JAVA","input.txt");//function calling
         System.out.println("Total occurrences of 'java':" + count);
     }
 }
