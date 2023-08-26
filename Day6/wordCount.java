@@ -7,22 +7,22 @@ public class Main {
     public static int wordCount(String word)  {
         int count =0;
         try {
-            File file =new File("input.txt");// filename
-            Scanner scan=new Scanner(file);
+            File file = new File("input.txt");// filename
+            Scanner scan = new Scanner(file);
+            scan.useDelimiter("\\Z");
+            String fileConcat = scan.next();
 
-            while (scan.hasNextLine()){
-                String fileConcat = scan.nextLine();
-                String temp[] = fileConcat.split("[ ]|[.]|[,]|[ \\t]");
+            String fileConcat = scan.nextLine();
+            String temp[] = fileConcat.split("[ ]|[.]|[,]|[ \\t]");
 
-                for (int i = 0; i < temp.length; i++) {
-                    if (word.equalsIgnoreCase(temp[i])) {
-                        count++;
-                    }
+            for (int i = 0; i < temp.length; i++) {
+                if (word.equalsIgnoreCase(temp[i])) {
+                    count++;
                 }
             }
-
             scan.close();
         }
+
         //If file not found then msg will be displayed
         catch (FileNotFoundException e) {
             System.out.println("File Not Found");
