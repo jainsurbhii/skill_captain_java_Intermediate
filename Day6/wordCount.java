@@ -11,7 +11,7 @@ public class Main {
             Scanner scan = new Scanner(file);
             scan.useDelimiter("\\Z");
             String fileConcat = scan.next();
-
+            System.out.println(fileConcat);
             String fileConcat = scan.nextLine();
             String temp[] = fileConcat.split("[ ]|[.]|[,]|[ \\t]");
 
