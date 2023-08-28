@@ -10,7 +10,7 @@ public class Main {
         System.out.println("Enter File Name");
         String fileName=sc.next();
         System.out.println("Enter a Sentence");
-        String text=sc.nextLine();
+        String text=sc.next();
         sc.close();
         writeFile(fileName,text);//Function call
     }
