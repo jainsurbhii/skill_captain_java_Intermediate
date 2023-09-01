@@ -1,18 +1,44 @@
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.ArrayList;//import ArrayList
+import java.util.List;//import ArrayList
+import java.util.Scanner;/// Import the Scanner class to take input
+import java.util.regex.Matcher;// Importing Matcher class from java.util.regex package
+import java.util.regex.Pattern;// Importing Pattern class from java.util.regex package
 
 public class Main {
 
     public static void main(String[] args) {
+        UserRepository userRepository=new UserRepository();
         Scanner sc=new Scanner(System.in);
+        System.out.println("Enter Name");
         String name=sc.nextLine();
+        System.out.println("Enter Email");
         String email=sc.nextLine();
+        System.out.println("Enter password");
         String password=sc.nextLine();
+        System.out.println("Enter Address");
         String address=sc.nextLine();
-        input(name,email,password,address);
+        sc.close();
+        input(name,email,password,address);//function calling
     }
+    //function to check input is valid or not
+    public static void input(String name,String email,String password,String address){
+        //check all fields
+        if(name.isEmpty() ||email.isEmpty()||password.isEmpty()||address.isEmpty()){
+            System.out.println("All field are mandatory");
+        }
+        //Check email is valid or not
+        else if(!isValidEmail(email)){
+            System.out.println("Please enter valid email");
+        }
+        else {
+            User user=new User(name,email,password,address);
+            UserRepository userRepository=new UserRepository();
+            userRepository.addUser(user);
+            UserRepository.getUser(email);
+            UserRepository.getAllUsers();
+        }
+    }
+    //function to check email format
     public static boolean isValidEmail(String email){
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
                 "[a-zA-Z0-9_+&*-]+)*@" +
@@ -24,10 +50,8 @@ public class Main {
         return match.matches();
 
     }
-    public static void input(String name,String email,String password,String address){
-
-    }
 }
+//User input
 class User{
     private String name;
     private String email;
@@ -41,32 +65,53 @@ class User{
         this.address=address;
     }
 
-    public void setName(String name){
-        this.name=name;
+    public String getName(){
+        return name;
     }
-    public  void setEmail(String email){
-        this.email=email;
+    public  String getPassword(){
+        return password;
     }
-    public  void setPassword(String password){
-        this.password=password;
+    public String getEmail(){
+        return email;
     }
-
-    public  void setAddress(String address){
-        this.address=address;
+    public  String getAddress(){
+        return address;
     }
 }
+//UserRepository
 class UserRepository{
-    ArrayList<User> userList  = new ArrayList<>();
 
-    void addUser(User user){
+    private static List<User> userList;
+
+    public UserRepository(){
+        userList  = new ArrayList<>();
+    }
+//Add user in the list
+    public void addUser(User user){
         userList.add(user);
-
     }
-    void getUser(String email){
-
+    //check email is present or not
+    public static void getUser(String email){
+        System.out.println("Enter Email to check");
+        Scanner sc=new Scanner(System.in);
+        email=sc.nextLine();
+        for (User UserList : userList){
+            if (UserList.getEmail().equalsIgnoreCase(email)){
+                System.out.println("Email already exits");
+            }
+            else {
+                System.out.println("Data Saved Successfully");
+            }
+        }
+        sc.close();
     }
-    void getAllUsers(){
-
+    //To get all the data
+    public static void getAllUsers(){
+        for (User  UserList: userList) {
+            System.out.println(UserList.getAddress());
+            System.out.println(UserList.getEmail());
+            System.out.println(UserList.getName());
+            System.out.println(UserList.getPassword());
+        }
     }
-
 }
