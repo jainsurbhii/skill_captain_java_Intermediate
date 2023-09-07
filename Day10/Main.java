@@ -37,14 +37,17 @@ class Cart{
     public Cart(){
         CartList =new ArrayList<>();
     }
+    //Add To Cart
     public void addToCart(Product product){
         CartList.add(product);
         System.out.println("product added to the cart");
     }
+    //Remove the quantity
     public void removeFromCart(Product product){
         CartList.remove(product);
         System.out.println("product removed from the cart");
     }
+    //Update the Quantity
     public void updateQuantity(Product product, int quantity){
 
         Scanner scan = new Scanner(System.in);
@@ -53,6 +56,7 @@ class Cart{
         product.getQuantity();
 
     }
+    //View Cart
     public void viewCart(){
         System.out.println("Cart details are:");
         for (Product product: CartList){
@@ -63,6 +67,7 @@ class Cart{
         }
 
     }
+    //Checkout
     public void checkout(){
         if (CartList.isEmpty()){
             System.out.println("Your cart is Empty");
